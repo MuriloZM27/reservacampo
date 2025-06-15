@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { MapPin, Clock, Star, Users, Filter, X } from 'lucide-react';
+import React, { useMemo } from 'react';
+import { MapPin, Clock, Star, Users, X } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { Field } from '../../types';
 
@@ -9,7 +9,6 @@ interface FieldsPageProps {
 
 export function FieldsPage({ onFieldSelect }: FieldsPageProps) {
   const { fields, searchFilters, updateSearchFilters } = useApp();
-  const [showFilters, setShowFilters] = useState(false);
 
   const neighborhoods = [...new Set(fields.map(field => field.neighborhood))];
 
