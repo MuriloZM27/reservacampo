@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, MapPin, Clock, Star, TrendingUp, Calendar } from 'lucide-react';
+import { MapPin, Clock, Star, TrendingUp, Calendar } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 
 interface HomePageProps {
@@ -7,7 +7,7 @@ interface HomePageProps {
 }
 
 export function HomePage({ onPageChange }: HomePageProps) {
-  const { fields, searchFilters, updateSearchFilters } = useApp();
+  const { fields, updateSearchFilters } = useApp();
 
   const featuredFields = fields.slice(0, 3);
 

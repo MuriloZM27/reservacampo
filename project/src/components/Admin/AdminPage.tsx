@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Edit, Trash2, Save, X, MapPin, Clock, Users, DollarSign, Image } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, X, MapPin, Image } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 import { Field } from '../../types';
 

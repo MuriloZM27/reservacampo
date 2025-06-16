@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User, Field, Reservation, SearchFilters } from '../types';
 
 interface AppContextType {
@@ -96,9 +96,15 @@ const mockFields: Field[] = [
 ];
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(() => {
+    const stored = localStorage.getItem("user");
+    return stored ? JSON.parse(stored) : null;
+  });
   const [fields, setFields] = useState<Field[]>(mockFields);
-  const [reservations, setReservations] = useState<Reservation[]>([]);
+  const [reservations, setReservations] = useState<Reservation[]>(() => {
+    const stored = localStorage.getItem("reservations");
+    return stored ? JSON.parse(stored) : [];
+  });
   const [searchFilters, setSearchFilters] = useState<SearchFilters>({
     query: '',
     type: '',
@@ -108,8 +114,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
     maxPrice: 200
   });
   const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user");
+    }
+  }, [user]);
 
-  const login = async (email: string, password: string): Promise<boolean> => {
+  useEffect(() => {
+    localStorage.setItem("reservations", JSON.stringify(reservations));
+  }, [reservations]);
+
+
+  const login = async (email: string): Promise<boolean> => {
     setIsLoading(true);
     // Mock login logic
     await new Promise(resolve => setTimeout(resolve, 1000));
